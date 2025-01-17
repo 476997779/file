@@ -1,0 +1,8 @@
+﻿使用说明：
+1、下载Linux操作系统的内核源代码；
+2、将demo_driver.patch的代码通过代码编辑工具更新到操作系统的内核中的sound/pci/hda/patch_conexant.c中；
+3、执行make重新编译操作系统内核；
+4、执行make modules编译内核模块；
+5、执行make modules_install安装内核模块；
+6、执行make install安装新内核到操作系统；
+7、reboot重启操作系统，选择新编译的内核进入操作系统。

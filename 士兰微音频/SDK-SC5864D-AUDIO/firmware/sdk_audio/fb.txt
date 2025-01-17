@@ -1,0 +1,285 @@
+;#<FEEDBACK># ARM Linker, 5060750: Last Updated: Fri Mar 05 13:56:04 2021
+;VERSION 0.2
+;FILE audio_proc.o
+__asm___12_audio_proc_c_e75fb632____REV16 <= USED 0
+__asm___12_audio_proc_c_e75fb632____REVSH <= USED 0
+audio_dev_proc <= USED 0
+;FILE main.o
+__asm___6_main_c_9a7fc61d____REV16 <= USED 0
+__asm___6_main_c_9a7fc61d____REVSH <= USED 0
+;FILE retarget.o
+_ttywrch <= USED 0
+fgetc <= USED 0
+;FILE silan_adev_onelli.o
+__asm___19_silan_adev_onelli_c_63ff7d6f____REV16 <= USED 0
+__asm___19_silan_adev_onelli_c_63ff7d6f____REVSH <= USED 0
+silan_adev_get_fullness <= USED 0
+silan_adev_get_space <= USED 0
+silan_adev_i2s_revoke <= USED 0
+silan_adev_i2s_stop <= USED 0
+silan_adev_ring_read <= USED 0
+silan_adev_ring_write <= USED 0
+silan_adev_spdif_o_alloc <= USED 0
+silan_adev_spdif_o_open <= USED 0
+silan_adev_spdif_o_set_rate <= USED 0
+silan_adev_spdif_o_start <= USED 0
+silan_adev_spdif_o_submit <= USED 0
+;FILE silan_audio_clkgen.o
+__asm___20_silan_audio_clkgen_c_64f8dfb8____REV16 <= USED 0
+__asm___20_silan_audio_clkgen_c_64f8dfb8____REVSH <= USED 0
+silan_i2s_route_init <= USED 0
+silan_spdif_o_clock_config <= USED 0
+;FILE silan_bootspi.o
+__asm___15_silan_bootspi_c_8005a3eb____REV16 <= USED 0
+__asm___15_silan_bootspi_c_8005a3eb____REVSH <= USED 0
+bootspi_init <= USED 0
+bootspi_io_done <= USED 0
+bootspi_read32 <= USED 0
+bootspi_read8 <= USED 0
+bootspi_sectorerase <= USED 0
+ex_spi_crc_enable <= USED 0
+ex_spiflash_power_recover_enable <= USED 0
+spi_flash_enter_qpi_mode <= USED 0
+spi_flash_exit_qpi_mode <= USED 0
+spi_flash_init <= USED 0
+spi_flash_uninit <= USED 0
+spiflash_otp_mode_exit <= USED 0
+spiflash_otp_mode_set <= USED 0
+spiflash_write_disable <= USED 0
+;FILE silan_buffer.o
+silan_buf_ring_read <= USED 0
+silan_buf_ring_write <= USED 0
+;FILE silan_calib.o
+silan_get_softid <= USED 0
+;FILE silan_codec.o
+__asm___13_silan_codec_c_8f16cda7____REV16 <= USED 0
+__asm___13_silan_codec_c_8f16cda7____REVSH <= USED 0
+config_codec_iis_adc <= USED 0
+config_codec_iis_dac <= USED 0
+set_adc1_left_channel_digital_gain <= USED 0
+set_adc1_left_channel_mic_analog_gain <= USED 0
+set_adc1_left_channel_micboost_gain <= USED 0
+set_adc1_left_channel_other_analog_gain <= USED 0
+set_adc1_right_channel_digital_gain <= USED 0
+set_adc1_right_channel_mic_analog_gain <= USED 0
+set_adc1_right_channel_micboost_gain <= USED 0
+set_adc1_right_channel_other_analog_gain <= USED 0
+set_adc2_left_channel_digital_gain <= USED 0
+set_adc2_left_channel_mic_analog_gain <= USED 0
+set_adc2_left_channel_micboost_gain <= USED 0
+set_adc2_left_channel_other_analog_gain <= USED 0
+set_adc2_right_channel_digital_gain <= USED 0
+set_adc2_right_channel_mic_analog_gain <= USED 0
+set_adc2_right_channel_micboost_gain <= USED 0
+set_adc2_right_channel_other_analog_gain <= USED 0
+set_dac1_left_channel_analog_gain <= USED 0
+set_dac1_right_channel_analog_gain <= USED 0
+set_dac2_left_channel_analog_gain <= USED 0
+set_dac2_right_channel_analog_gain <= USED 0
+silan_codec1_adc_analog_init <= USED 0
+silan_codec1_adc_digital_init <= USED 0
+silan_codec1_dac_digital_init <= USED 0
+silan_codec1_dac_mute <= USED 0
+silan_codec1_dac_unmute <= USED 0
+silan_codec2_adc_analog_init <= USED 0
+silan_codec2_adc_digital_init <= USED 0
+silan_codec2_dac_digital_init <= USED 0
+silan_codec2_dac_mute <= USED 0
+silan_codec2_dac_unmute <= USED 0
+silan_codec_alc_off <= USED 0
+silan_codec_alc_on <= USED 0
+silan_codec_alc_para_config <= USED 0
+silan_codec_open <= USED 0
+silan_codec_power_down <= USED 0
+silan_codec_pwd_deal <= USED 0
+;FILE silan_dmac.o
+__asm___12_silan_dmac_c_d910afe9____REV16 <= USED 0
+__asm___12_silan_dmac_c_d910afe9____REVSH <= USED 0
+silan_dmac_get_next_lli <= USED 0
+silan_dmac_release_ch <= USED 0
+silan_dmac_release_transfer <= USED 0
+silan_dmac_request_stop <= USED 0
+;FILE silan_gpio.o
+__asm___12_silan_gpio_c_d22664ba____REV16 <= USED 0
+__asm___12_silan_gpio_c_d22664ba____REVSH <= USED 0
+silan_gpio_filsel_sel <= USED 0
+silan_io_direction <= USED 0
+silan_io_filter_close <= USED 0
+silan_io_filter_config <= USED 0
+silan_io_filter_open <= USED 0
+silan_io_irq_clear <= USED 0
+silan_io_irq_enable <= USED 0
+silan_io_irq_mode <= USED 0
+silan_io_irq_request <= USED 0
+silan_io_set_value <= USED 0
+;FILE silan_i2s.o
+__asm___11_silan_i2s_c_ce0ed305____REV16 <= USED 0
+__asm___11_silan_i2s_c_ce0ed305____REVSH <= USED 0
+silan_i2s_stop <= USED 0
+;FILE silan_iomux.o
+io_config <= USED 0
+silan_io_attr_get <= USED 0
+silan_io_attr_set <= USED 0
+silan_io_ie_config <= USED 0
+silan_io_pullup_config <= USED 0
+silan_iomux_adc_close <= USED 0
+silan_iomux_adc_open <= USED 0
+;FILE silan_m0_cache.o
+cache_unlock_code <= USED 0
+m0_cache_init <= USED 0
+silan_m0_cache_unlock <= USED 0
+;FILE silan_m0_irq_port.o
+__asm___19_silan_m0_irq_port_c_4bbf778b____REV16 <= USED 0
+__asm___19_silan_m0_irq_port_c_4bbf778b____REVSH <= USED 0
+pic_get_enable <= USED 0
+pic_port_free <= USED 0
+pic_port_init <= USED 0
+pic_set_enable <= USED 0
+silan_irq_free <= USED 0
+;FILE silan_pic.o
+__asm___11_silan_pic_c_76c24f7b____REV16 <= USED 0
+__asm___11_silan_pic_c_76c24f7b____REVSH <= USED 0
+silan_pic_disable <= USED 0
+silan_pic_enable <= USED 0
+silan_pic_free <= USED 0
+silan_pic_get_subid <= USED 0
+silan_pic_get_subid_stat <= USED 0
+;FILE silan_pmu.o
+ap_audio_pll_down <= USED 0
+ap_audio_pll_get <= USED 0
+ap_audio_pll_normal <= USED 0
+ap_audio_pll_up <= USED 0
+audio_pll_down <= USED 0
+audio_pll_get_change <= USED 0
+audio_pll_normal <= USED 0
+audio_pll_up <= USED 0
+get_audiopll_fbdiv <= USED 0
+get_sysclk_val_settled <= USED 0
+pre_sysclk_sel <= USED 0
+silan_clear_pmu_status <= USED 0
+silan_dsp_ldo_disable <= USED 0
+silan_get_audiopll_clk <= USED 0
+silan_get_audiopll_config <= USED 0
+silan_get_pmu_status <= USED 0
+silan_lvd_config <= USED 0
+silan_lvd_disable <= USED 0
+silan_lvr_config <= USED 0
+silan_lvr_disable <= USED 0
+silan_osc_disable <= USED 0
+silan_osc_enable <= USED 0
+silan_pmu_get_dsp_ldo <= USED 0
+silan_pmu_irq_enable <= USED 0
+silan_pmu_syspll_pdn <= USED 0
+silan_pmu_wakeup_disable <= USED 0
+silan_pmu_wakeup_enable <= USED 0
+silan_pmu_wdt_clr <= USED 0
+silan_pmu_wdt_init <= USED 0
+silan_pmu_wdt_reset_config <= USED 0
+silan_pmu_wdt_reset_disable <= USED 0
+silan_pwr_iso_disable <= USED 0
+silan_pwr_iso_enable <= USED 0
+silan_rch_enable <= USED 0
+silan_sar_adc_vref_select <= USED 0
+silan_sdram_pwd_deal <= USED 0
+silan_sdram_pwd_quit <= USED 0
+silan_soc_stop <= USED 0
+silan_spiflash_power_enable <= USED 0
+silan_sysclk_change <= USED 0
+silan_syspll_init <= USED 0
+silan_tck_config <= USED 0
+silan_ubck_disable <= USED 0
+silan_upll32k_sel <= USED 0
+silan_usb_pwd_deal <= USED 0
+silan_usb_pwd_quit <= USED 0
+sysclk_init_op <= USED 0
+syspll_config <= USED 0
+;FILE silan_rtc.o
+silan_get_soc_ldo <= USED 0
+silan_rtc_init <= USED 0
+silan_rtcmem_ldo_onoff <= USED 0
+;FILE silan_spdif_o.o
+silan_spdif_o_config <= USED 0
+silan_spdif_o_dev_open <= USED 0
+silan_spdif_o_start <= USED 0
+;FILE silan_syscfg.o
+__asm___14_silan_syscfg_c_0d1f4ac2____REV16 <= USED 0
+__asm___14_silan_syscfg_c_0d1f4ac2____REVSH <= USED 0
+silan_adc_cclk_config <= USED 0
+silan_app_goto_bootload <= USED 0
+silan_bootup_dsp <= USED 0
+silan_bootup_risc <= USED 0
+silan_dsp_boot_from <= USED 0
+silan_dsp_power_domain_reset <= USED 0
+silan_dsp_reboot <= USED 0
+silan_get_dsp_cclk <= USED 0
+silan_get_flash_base <= USED 0
+silan_get_mcu_cclk <= USED 0
+silan_get_otp_base <= USED 0
+silan_get_sd_cclk <= USED 0
+silan_get_sdio_cclk <= USED 0
+silan_mcuclk_div_config <= USED 0
+silan_module_alloff <= USED 0
+silan_module_clkon <= USED 0
+silan_otp_cclk_config <= USED 0
+silan_pwm_cclk_config <= USED 0
+silan_risc_boot <= USED 0
+silan_risc_reboot <= USED 0
+silan_sd_cclk_config <= USED 0
+silan_sdio_cclk_config <= USED 0
+silan_soft_rst <= USED 0
+silan_spdifin_cclk_config <= USED 0
+silan_syspre_clksel <= USED 0
+silan_system_misc_clk_config <= USED 0
+;FILE silan_timer.o
+__asm___13_silan_timer_c_d8dbe8a0____REV16 <= USED 0
+__asm___13_silan_timer_c_d8dbe8a0____REVSH <= USED 0
+;FILE silan_uart.o
+__asm___12_silan_uart_c_96d6668c____REV16 <= USED 0
+__asm___12_silan_uart_c_96d6668c____REVSH <= USED 0
+serial_clear <= USED 0
+serial_getc <= USED 0
+silan_uart_busy <= USED 0
+silan_uart_getc <= USED 0
+silan_uart_getc_noblock <= USED 0
+silan_uart_putc <= USED 0
+silan_uart_tstc <= USED 0
+;FILE startup_cmsdk_cm0.o
+;FILE systeminit.o
+;FILE usb_bsp.o
+USB_OTG_BSP_ConfigVBUS <= USED 0
+USB_OTG_BSP_DriveVBUS <= USED 0
+USB_OTG_BSP_TimeInit <= USED 0
+USB_OTG_BSP_TimerIRQ <= USED 0
+__asm___9_usb_bsp_c_9c25e72c____REV16 <= USED 0
+__asm___9_usb_bsp_c_9c25e72c____REVSH <= USED 0
+;FILE usb_core.o
+USB_OTG_ActiveRemoteWakeup <= USED 0
+USB_OTG_GetEPStatus <= USED 0
+USB_OTG_GetMode <= USED 0
+USB_OTG_IsHostMode <= USED 0
+USB_OTG_ReadOtgItr <= USED 0
+USB_OTG_ReadPacket_ChEp <= USED 0
+USB_OTG_SetEPStatus <= USED 0
+USB_OTG_StopDevice <= USED 0
+USB_OTG_UngateClock <= USED 0
+__asm___10_usb_core_c_0d2ec05c____REV16 <= USED 0
+__asm___10_usb_core_c_0d2ec05c____REVSH <= USED 0
+;FILE usb_dcd.o
+DCD_DevConnect <= USED 0
+DCD_DevDisconnect <= USED 0
+DCD_EP_Flush <= USED 0
+DCD_GetEPStatus <= USED 0
+DCD_SetEPStatus <= USED 0
+__asm___9_usb_dcd_c_DCD_Init____REV16 <= USED 0
+__asm___9_usb_dcd_c_DCD_Init____REVSH <= USED 0
+;FILE usb_dcd_int.o
+;FILE usbd_audio_micspk.o
+;FILE usbd_core.o
+USBD_DeInit <= USED 0
+__asm___11_usbd_core_c_3d268f20____REV16 <= USED 0
+__asm___11_usbd_core_c_3d268f20____REVSH <= USED 0
+;FILE usbd_desc.o
+;FILE usbd_ioreq.o
+USBD_GetRxCount <= USED 0
+;FILE usbd_req.o
+;FILE usbd_usr.o
