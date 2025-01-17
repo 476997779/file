@@ -1,0 +1,293 @@
+什么是设备树？
+       设备树是一个ASCII文本文件，以.dts 结尾。放在arch/arm/boot/中，存放cpu的数量和类别，内存基地址和大小，中断控制器和中断
+       使用的情况，总线，时钟，gpio控制器和gpio的使用情况等
+       
+       设备树是一个数据结构，用于描述设备信息的语言，具体而言，是用于操作系统中描述硬件，使得不需要对设备的信息进硬编码（hard code）（硬编码就是得用.c文件，把设备信息储存起来，然后编译到内核镜像中）
+       
+       设备树由一系列的结点node、属性property 组成，而结点本身可以包括子结点。属性则是成对的name 和 value
+       
+       设备树源文件dts被编译成dtb二进制文件，在bootloader运行时候传递给操作系统，操作系统对其进行展开解析
+       
+       
+
+如何编译设备树
+	1. 以exynos4412-origen.dts为参考
+			eg：cp/arch/arm/boot/dts/exynos4412-origen.dts  cp/arch/arm/boot/dts/exynos4412-fs4412.dts
+		
+	2.添加新文件需修改Makefile才能编译
+			
+			vim arch/arm/boot/dts/Makefile 在exynos4412-origen.dtb \ 下添加如下内容
+				exynos4412-fs4412.dts \
+	
+	3.编译设备树文件
+			
+			make dtbs (生成dtb文件 给 BootLoader用)
+			
+	4.拷贝内核和设备树文件到/tftpboot目录下
+	
+			cp arch/arm/boot/dts/exynos4412-origen.dts   /tftpboot/
+			
+	5.设置启动参数
+	
+			set bootcmd tftp 0x41000000 uImage \; tftp 0x42000000 exynos4412-fs4412.dtb\;
+			bootm 0x41000000 - 0x42000000
+			
+	BootLoader会把dtb文件在内存中展开生成一个二叉树
+	
+								  alnode（根）           
+									 |
+							|--------|---------|			
+							|        |         |
+						   节点     节点      节点          一个节点就是一个设备 ,存着我们预存在dts中的设备信息
+							         |
+							    |----|----|              	 （很像一棵树）
+							    |         |
+							   节点      节点               我们可以使用系统提供的api来获取节点中储存的信息
+							   
+							   
+	
+	名词解释
+		DT: Device Tree
+		FDT: Flattened DeviceTree
+		OF: Open Firmware
+		DTS: device tree source
+		DTSI:device tree source include 
+		DTB: device tree blob
+		DTC: device tree compiler
+		
+		
+		
+设备树语法
+
+    节点
+	属性
+	根节点
+	compatible属性
+	reg属性
+	#address—cells #address—siz属性
+	中断信息属性--interrupts和 interrupts
+	
+	
+节点：每个节点必须有一个名字 格式：<名字>[@<设备地址>]  方括号的内容为可选项
+	<名字>就是一个不超过31位的简单ascii字符串，应该做到见名知意
+	eg： cpu@0 表示的名字是cpu0，cpu@1 表示的名字是cpu1 。当然名字也可以直接叫cpu
+	
+属性：简单的键值对，它的值可以是空，或者包含任意一个字节流，虽然数据类型并没有编码进数据结构，
+	  但在设备树源文件中的仍有几个基本的数据表示形式
+		
+	文本字符串（无结束符） 可以用双引号表示：
+			string-property = “a string”
+	cells是32位无符号整数，用尖括号限定:
+			cell-property = <0xbeef 123 0xabcd1234>
+	二进制数据用方括号限定
+			binary-property = [01 23 45 67] 注：这个特殊，这个代表的是01234567，是一个数，中间空格忽略，数占4字节
+	不同表示形式的数据可以使用逗号连接在一起“
+			mixed-propert = "a string", [01 23 45 67], <0x12345678>;
+	逗号也可以用于创建字符串列表：
+			string-list = “red fish”，“blue fish”
+				
+常见属性：
+·		1.compatible属性：是一个字符串列表，实际在代码中用于匹配，格式："<制造商>,<型号>"
+						eg：/{
+								compatible = "samsung,note10";
+							}
+							
+		2.#address—cells 表示子节点address字段的长度
+		  #size-cells    表示子节点length字段的长度
+						eg：/{
+								#address—cells = <2>;
+								#size-cells = <1>;
+								
+								ethernet@0,0{
+												compatible = "smc,smc911c1111";
+												reg = <0 0 0x1000>; //前面0 0 两个就是对应的address-cells = <2>,地址站2个cells，
+																	//0x1000对应size-cells = <1>，长度站1个cells 
+											}
+							}
+			
+		3.reg属性 描述地址和长度的属性 reg = <address1 length1 [address2 length2] [address3 length3] ...>
+						eg：/{
+								#address—cells = <1>;
+								#size-cells = <1>;
+								
+								ethernet@0,0{
+												compatible = "smc,smc911c1111";
+												reg = <0x101f2000 0x1000>; 地址：0x101f2000  长度：0x1000
+											}
+							}
+			
+		4.中断信息属性: 描述中断连接需要四个属性：
+							interrupt-controller 一个空的属性定义该节点作为一个接收中断信号的设备
+							
+							#interrupt-cells  这是一个中断控制器节点的属性。它声明了该中断控制器的中断提示符cell的个数(类似于#address-cells和#size-cells)
+							
+							interrupt-parent  这是一个设备节点属性，包括一个指向该设备连接的中断控制器的phandle（指向或者可以引用&）那些没有interrupt-parents
+											  的节点则从它们的父节点中继承该属性
+							
+							interrupts        一个设备节点属性，包含一个中断提示符列表，对应于该设备上的每一个中断输出信号
+		              
+								eg：/{
+										compatible = "acme,coyotes-revenge"
+										#address—cells = <1>;
+										#size-cells = <1>;
+										interrupt-parent = <&intc>;
+										
+										serial@1{
+														compatible = "smc,smc911c1111";
+														reg = <0x101f0000 0x10000>;
+														interrupts = <1 0>;
+												}:
+										intc: 			controller@1{
+														compatible = "smc,smc911c2222";
+														reg = <0x10140000 0x1000>;
+														interrupt-controller;
+														#interrupt-cells = <2>;
+													};
+									}
+					
+							注：根节点中定义了包含两个子节点 serial1 和 controller1，根节点中又定义了一个父亲节点intc，由于子节点controller1继承了父节点，
+								所以在子节点内部可以访问其他子节点(serial1),所以也就是说,serial1这个外设中断接到了controller1的interrupt-controller中了，
+								所以才有这个现象啊：定义了 #interrupt-cells = <2>; 于是： interrupts = <1 0>;  严格按照要求对齐的
+													     
+		5. interrupts = <>里面的参数具体什么意思？
+								
+								第一个参数：    0 for SPI interrupts ， 1 for PPI ，02 interrupts.
+								第二个参数：    SPI interrupts are in the range [0-987],PPI interrupts are in the range [0-15S]
+								第三个参数：    bits[3:0]
+								                1 = 上升沿触发 
+												2 = 下降沿触发
+												4 = 高电平触发
+												8 = 低电平触发
+						                        kernel/Documentation/devicetree/bindings/arm/gic.txt就有以上说明	
+							
+		加载完dtb文件 会在linux系统 /proc/device-tree 目录下有所体现
+
+常用的OF API
+    OF提供的函数主要集中在drivers/of/目录下，有address.c base.c device.c fdt.c irq.c platform.c等等
+	
+	
+										
+	
+	
+	
+	
+	
+	1.  根据device_node结构中的full_name参数，在全局链表of_allnodes中，查找合适的device_node
+			
+			struct device_node *of_find_node_by_path(const char *path)
+							
+						
+						/*	test_nod@12345678{
+							compatible = "farsight,test";
+							reg = <0x12345678 0x24
+									0x87654321 0x24>;
+									testprop,mytest;
+									test_list_string = "red fish","fly fish"，"blue fish";
+							}									
+						*/
+				
+							
+							struct device_node *np = NULL;
+							np = of_find_node_by_path("/test_nod@12345678");
+							if(np){
+								printk("find test node ok\n");
+							}else{
+								printk("find test node fail\n");
+							}
+							return 0;
+							
+	2.  根据property结构的name参数，在指定的device_node中查找合适的property
+			
+			struct property *of_find_property(const struct device_node *np , const char *name, int *lenp)
+	
+							struct property *prop = NULL;
+							prop = of_find_property(np,"compatible",NULL);
+							if(prop){
+								printk("find compatible ok ");
+								printk("$s\n",prop->value);
+								printk("$s\n",pror->name);
+							}else{
+								printk("failed");
+							}
+					
+					
+	3.  根据compat参数与device node 的cmpatible匹配，返回匹配度
+			
+			int of_device_is_compatible(const struct device_node *device ,const char *compat)
+			
+							if(of_device_is_compatible(np,"farsight,test")){
+								printk("matching success ");	
+							}
+	
+	4.  获取父节点的device node
+			
+			struct device_node *of_get_parent(const struct device_node *node)
+			
+	
+	
+	5.  根据属性名propname，读出该属性的数组中的sz个属性值给out_values
+			
+			int of_property_read_u32_array(const struct device_node *np,const char *propname,u8 *out_values,size_t sz)
+			
+							u32 regdata[U32_DATA_LEN];
+							int ret
+							
+							ret = of_property_read_u32_array(np,"reg",regdata,U32_DATA_LEN);
+							if(!ret){
+								int i;
+								for(i=0;i<U32_DATA_LEN;i++)
+									printk("-----regdata[%d] = %x\n"),i,regdata[i])；
+							}else{
+								printk("failed");
+							}
+							
+
+	6. 读取到属性中的字数组的符串
+		static int	of_property_read_string_index(const struct device_node *np,const char *propname,size_t sz,const char **p)
+			
+			const char *pstr[3];
+			int i ;
+			for(i=0;i<3;i++){
+				ret = of_property_read_string_index(np,"test_list_string",i,$pstr[i]);
+							if(!ret){
+									printk("-----pstr[%d] = %s\n"),i,pstr[i])；
+							}else{
+								printk("failed\n");
+						
+
+						}
+	7.  读取该设备的第index个irq号
+	
+			unsigned int irq_of_parse_and_map(struct device_node *dev,int index)
+				
+			
+							
+							
+		
+
+
+
+
+
+
+
+
+
+		
+				
+				
+				
+			
+	
+	
+	
+	
+	
+
+							   
+							   
+							   
+							   
+							   
+							   
+							    
